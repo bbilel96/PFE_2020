@@ -1,0 +1,7 @@
+{
+  "name": "PFE_Ecommerce",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

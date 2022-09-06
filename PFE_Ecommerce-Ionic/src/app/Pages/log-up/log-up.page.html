@@ -1,0 +1,134 @@
+
+<ion-header class="ion-no-border">
+  <ion-buttons slot="start">
+    <ion-button  (click)="back()">
+      <ion-icon  slot='icon-only' name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+
+  <div class="icon-title"><ion-icon name="person-add-outline"></ion-icon></div>
+  <ion-grid style="margin-top:-10%">
+    <ion-row>
+      <ion-col size = "12">
+        <h1 class="title">Register</h1>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+
+        <p class="sub-title">Create new account</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-header>
+  <!--<app-header-log title="Register"  link="/log-in"></app-header-log>-->
+<ion-content>
+  <!--Slide1-->
+  <ion-slides  dir=“rtl” [options]="slideOpts" style="height: 80%;">
+    
+    <ion-slide>
+      
+      <ion-grid>
+        <form [formGroup]="form1" (ngSubmit)="step1()">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" >Name</ion-label>
+            <ion-input type="text"  [(ngModel)]="nameInput" formControlName="name" required></ion-input>
+              </ion-item>
+           
+          </ion-col>
+        </ion-row>
+        <ion-row>
+        <ion-col size="12">
+          <ion-item>
+            <ion-label position="floating" >Email</ion-label>
+            <ion-input type="email"  [(ngModel)]="mail" formControlName="email"></ion-input>
+          </ion-item>
+          
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12" style="margin-top: 5% ">
+            <ion-button class="submit-button" type="submit" shape="shape"><strong>Continue</strong></ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+      </ion-grid>
+      
+    </ion-slide>
+    <!--Slide 2-->
+    <ion-slide>
+      <ion-grid>
+        <form [formGroup]="form2"(ngSubmit)="step2()">
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" >Password</ion-label>
+                  <ion-input type="password" [(ngModel)]="pass" formControlName="password"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" >Confirm Password</ion-label>
+                  <ion-input type="password" [(ngModel)]="cPass" formControlName="cPassword"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" style="margin-top: 5% ">
+            <ion-button  class="submit-button"  shape="block" (click)="back1()"><strong>Back</strong></ion-button>
+          </ion-col>
+        
+          <ion-col size="6" style="margin-top: 5% ">
+            <ion-button  class="submit-button" type="submit" shape="block"><strong>Next</strong></ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+        </ion-grid>
+    </ion-slide>
+    <!--Slide 3-->
+    <ion-slide>
+      <ion-grid style="line-height: 15px;">
+        <form [formGroup]="form3" (ngSubmit)="step3()" >
+        <ion-row>
+          <ion-col size="12">
+            <ion-item>
+              <ion-label position="floating" >Phone</ion-label>
+                  <ion-input type="tel" [(ngModel)]="ph" formControlName="phone"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6" style="margin-top: 5% ">
+            <ion-button  class="submit-button" type="submit" shape="block" (click)='back2()'><strong>Back</strong></ion-button>
+          </ion-col>
+        
+        
+          <ion-col size="6" style="margin-top: 5% ">
+            <ion-button  class="submit-button"  type="submit" shape="block"><strong>Finish</strong></ion-button>
+          </ion-col>
+        </ion-row>
+      </form>
+      </ion-grid>
+    </ion-slide>
+</ion-slides>
+<ion-grid>
+  <ion-row>
+    <ion-col class="footer">
+      <div class="footerLink" (click)="nav()"> Sign in an account </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
+
+
+
+
+
+  
+

@@ -1,0 +1,106 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Command history</ion-title>
+    <ng-container *ngIf="command!=0">
+    <ion-buttons slot="end">
+      <ion-icon  name="search" slot="icon-only" style="margin-right: 10px" (click)="portChange()" ></ion-icon>
+
+    </ion-buttons>
+    </ng-container>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+  <ng-container *ngIf="command == 0">
+
+    <ion-grid style="margin-top: 100px">
+      <ion-row>
+        <ion-col style="text-align: center;">
+          <ion-icon name="alert-circle-outline" style="height: 200px; width: 200px;"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col style="text-align: center">
+          <h5> You don't have any command yet ! </h5>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ng-container>
+  <ng-container *ngIf="command!=0">
+    <ion-list>
+      <ion-list-header>
+        Your commands
+      </ion-list-header>
+    <ng-container *ngFor="let c of this.command">
+
+      <ion-item button (click)="openCommand(c)">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="7">
+              {{c.date_command | date:'medium'}}<br>
+              <ion-label> <p>
+                <ng-container *ngIf="c.command_type.toLocaleLowerCase()=='delivery'">
+
+                    Delivery -
+
+                </ng-container>
+                <ng-container *ngIf="c.command_type.toLocaleLowerCase()!='delivery'">
+
+                   not a delivery -
+
+                </ng-container>
+              <ng-container *ngIf="c.state.toLowerCase()=='audit'">
+
+                    Under audit
+
+              </ng-container>
+              <ng-container *ngIf="c.state.toLowerCase()=='preper'">
+
+
+                  in preparation
+
+
+              </ng-container>
+              <ng-container *ngIf="c.state.toLowerCase()=='ready'">
+
+
+                  Ready
+
+
+
+              </ng-container>
+              <ng-container *ngIf="c.state.toLowerCase()=='payed'">
+
+
+                  Payed
+
+
+              </ng-container>
+              <ng-container *ngIf="c.state.toLowerCase()=='cancel'">
+
+
+                    Canceled
+
+
+              </ng-container>
+              </ion-label>
+            </ion-col>
+
+            <ion-col style="text-align: right" size="5">
+              <ion-label style="text-align: right;"> {{c.total_price}} DT </ion-label>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+
+
+    </ng-container>
+    </ion-list>
+  </ng-container>
+
+</ion-content>

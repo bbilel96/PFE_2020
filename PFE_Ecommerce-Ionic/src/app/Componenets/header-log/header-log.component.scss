@@ -1,0 +1,32 @@
+.header{position: relative;
+    height: 300px;
+   
+  }
+.circle{
+  border-radius: 150px 150px 150px 150px;
+-moz-border-radius: 150px 150px 150px 150px;
+-webkit-border-radius: 150px 150px 150px 150px;
+border: 0px solid #000000;
+background-color:#F7501C;
+margin-right: -100%;
+
+}
+.title{
+ padding:37px;
+position:left;
+color:white;
+}
+.buttons{
+  border-radius: 0px 200px 200px 0px;
+-moz-border-radius: 0px 200px 200px 0px;
+-webkit-border-radius: 0px 200px 200px 0px;
+border: 0px solid #000000;
+background-color:#F7501C;
+  margin-left:-50%;
+  padding-left:30%;
+  text-align:left;
+}
+.icon{
+  color:white;
+}
+    

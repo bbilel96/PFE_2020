@@ -1,0 +1,35 @@
+<ion-split-pane contentId="main-content">
+  <ion-menu contentId="main-content" type="overlay" color="primary">
+    <ion-content>
+      <div class="menu-header-bg"></div>
+      <div class="header-sub">
+        <ion-title class="title">
+          Welcome to {{this.restaurant?.name}}
+        </ion-title>
+        <ion-title class="sub-titel"> <p>{{this.admin?.email}}</p></ion-title>
+      </div>
+      <ion-list id="inbox-list" class="menu-items">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
+          <ion-item (click)="sendAdmin(p,i)" routerDirection="root"  lines="none" detail="false" [class.selected]="selectedIndex == i">
+            <ng-container *ngIf="p.title!=='Log out'">
+              <ion-label>{{ p.title }}</ion-label>
+            </ng-container>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item (click)="removeItem()" routerDirection="root" lines="none" detail="false" routerLink="" >
+            <ion-label>
+              Log out
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+
+    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-split-pane>

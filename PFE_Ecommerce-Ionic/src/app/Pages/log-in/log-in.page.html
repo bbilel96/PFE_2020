@@ -1,0 +1,80 @@
+<ion-app>
+  <ion-header class="ion-no-border">
+          <ion-buttons slot="start">
+            <ion-button  (click)="back()">
+              <ion-icon  slot='icon-only' name="chevron-back-outline"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+
+    <div class="icon-title"><ion-icon name="person-circle-outline"></ion-icon></div>
+    <ion-grid style="margin-top:-10%">
+      <ion-row>
+        <ion-col size = "12">
+          <h1 class="title">Welcome back</h1>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="12">
+
+          <p class="sub-title">Sign to continue</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+  </ion-header>
+
+<ion-content>
+ 
+  <ion-grid>
+    <form [formGroup]="connectionForm" (ngSubmit)="login()">
+    <ion-row>
+      <ion-col size="12">
+       
+        <ion-item>
+          <ion-label position="floating" >Email</ion-label>
+          
+        <ion-input clearInput type="email" [(ngModel)]="mail" formControlName="email"></ion-input>
+          </ion-item>
+           
+          
+      </ion-col>
+      
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-item>
+          <ion-label position="floating" >Password</ion-label>
+              <ion-input type="password" [(ngModel)]="pass" formControlName="password" required></ion-input>
+        </ion-item><br>
+
+          <ng-container *ngIf=" password.errors &&( password.dirty || password.touched)">
+            <span  class="danger">{{msgP}}</span>
+          </ng-container>
+      </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+        </ion-col>
+      </ion-row>
+    <ion-row>
+      <ion-col size="12" style="text-align: right;">
+        <div routerLink="/reset-password" class="forget">Forget Password?</div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        <ion-button class="submit-button" color="primary" type="submit" shape="block"><strong>Login</strong></ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+    <ion-row>
+      <ion-col class="footer">
+          <div class="footerLink" (click)="nav()"> Sign up an account </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+
+</ion-content>
+</ion-app>

@@ -1,0 +1,82 @@
+<br>
+<br>
+<link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+<div style="text-align: center;">
+<img height="130" src="../../assets/img/undraw_Hamburger_8ge6.svg" alt="">
+<h1 style="font-family: 'Courgette', cursive;">
+Form add Products
+</h1>
+
+
+  <form [formGroup]="inputs" (ngSubmit)="onSubmit($event)" >
+
+
+
+    <mat-form-field appearance="fill">
+      <mat-label>Family</mat-label>
+      <mat-select  [(ngModel)]="fam" [ngModelOptions]="{standalone: true}" >
+        <ng-container *ngFor="let f of this.family">
+        <mat-option (click)="change(fam)" [value]="f" >{{f.name}}</mat-option>
+        </ng-container>
+      </mat-select>
+    </mat-form-field><br>
+    <ng-container *ngIf="fam!=undefined">
+      <ng-container *ngIf="fam.sub_families.length!=0">
+    <mat-form-field appearance="fill">
+      <mat-label>Sub families</mat-label>
+      <mat-select [(ngModel)]="subF" [ngModelOptions]="{standalone: true}" >
+        <ng-container *ngFor="let sub of fam.sub_families">
+        <mat-option  [value]="sub">{{sub.name}}</mat-option>
+        </ng-container>
+      </mat-select>
+
+    </mat-form-field><br>
+      </ng-container>
+    </ng-container>
+    <mat-form-field class="example-full-width">
+
+      <mat-label>Product name</mat-label>
+      <input matInput [(ngModel)]="name" placeholder="name" formControlName="nameFormControl">
+      <mat-error *ngIf="inputs.controls['nameFormControl'].hasError('maxLength')">
+        The maximum length is <strong>50</strong> characters
+      </mat-error>
+      <mat-error *ngIf="inputs.controls['nameFormControl'].hasError('required')">
+        Product name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field><br>
+    <mat-form-field class="example-full-width"><br>
+    <mat-label>Product price</mat-label>
+    <input matInput [(ngModel)]="price"  placeholder="price" formControlName="priceFormControl">
+    <mat-error *ngIf="inputs.controls['priceFormControl'].hasError('required')">
+      Product price is <strong>required</strong>
+    </mat-error>
+      <mat-error *ngIf="inputs.controls['priceFormControl'].hasError('pattern')">
+        Product price is <strong>invalid</strong>
+      </mat-error>
+    </mat-form-field><br>
+
+    <mat-form-field class="example-full-width"><br>
+      <mat-label>Product description</mat-label>
+      <textarea matInput [(ngModel)]="desc" formControlName="descriptionFormControll"
+                cdkAutosizeMinRows="1"
+                cdkAutosizeMaxRows="5"></textarea>
+      <mat-error *ngIf="inputs.controls['descriptionFormControll'].hasError('required')">
+        Description is <strong>required</strong>
+      </mat-error>
+      <mat-error *ngIf="inputs.controls['descriptionFormControll'].hasError('maxLength')">
+        The maximum length is <strong>255</strong> characters
+      </mat-error>
+    </mat-form-field> <br>
+
+    <input type="file" #fileupload  [(ngModel)]="myFile" formControlName="pictureFormControl" name="myFile" (change)="fileEvent($event)"/>
+<br>
+
+  <button mat-raised-button type="submit" color="primary"  [disabled]="!inputs.valid || this.fam==undefined || (this.subF==undefined && this.fam.sub_families.length!=0) ">Ajouter</button>
+  <br>
+
+</form>
+
+
+
+</div>
+

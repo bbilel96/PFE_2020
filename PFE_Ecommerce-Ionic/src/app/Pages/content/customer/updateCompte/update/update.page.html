@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form" (ngSubmit)="form1()">
+        <ion-list padding>
+          <ion-item >
+            <ion-label position="stacked">name</ion-label>
+            <ion-input [(ngModel)]="nameInput" formControlName="name" value={{this.cust?.name}} placeholder={{this.cust?.name}}></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Password</ion-label>
+            <ion-input [(ngModel)]="passwordInput" formControlName="password" type="password" placeholder="Your new password"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="stacked">Phone number</ion-label>
+            <ion-input  type="tel" [(ngModel)]="phoneInput" value={{this.cust?.phone}} formControlName="phone" placeholder={{this.cust?.phone}}></ion-input>
+          </ion-item>
+        </ion-list>
+    <ion-button class="button-buy" type="submit" expand="full"><strong>Update</strong></ion-button>
+
+  </form>
+</ion-content>
+

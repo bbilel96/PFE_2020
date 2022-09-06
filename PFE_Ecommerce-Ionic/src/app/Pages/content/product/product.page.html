@@ -1,0 +1,212 @@
+
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+
+
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-icon  name="search" slot="icon-only" style="margin-right: 10px" (click)="portChange()" ></ion-icon>
+        </ion-buttons>
+        <ion-buttons slot="end">
+
+            <ion-icon (click)="openCart()" name="cart" slot="icon-only" ></ion-icon>
+            <ion-badge *ngIf="this.count>0" style="--background:white;--color:#DC143C;margin-top:-20px;">
+                {{this.count}}
+            </ion-badge>
+        </ion-buttons>
+        <ion-title>Menu</ion-title>
+
+
+
+    </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content cmass="home" padding>
+
+    <ion-grid style="padding-left:10px;padding-top: 10px">
+        <ion-row>
+            <ion-col size="12">
+                <span>
+                    <ion-title>
+                        Best Buy
+                    </ion-title>
+                </span>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+<ion-slides [options]="slideOptions"style="padding-bottom:50px;padding-top: 20px;">
+
+    <ion-slide  *ngFor="let publicity of pubs"  class="category-block">
+        <ng-container *ngIf="publicity.command.sub_families.length==0">
+      <ion-card class="pub" style="height: 100%;" (click)="function(publicity.command,publicity.command.products[0],undefined,findProd(publicity.command.id,publicity.command.products[0].id,undefined))">
+          <img style=" filter: brightness(70%);height: 60%; width: 100%;" src={{publicity.command.products[0].product_image}}/>
+          <div class="added" *ngIf="findProd(publicity.command.id,publicity.command.products[0].id,undefined)">
+              <ion-badge class="notif_prod"color="primary">{{productC(publicity.command.id,publicity.command.products[0].id,undefined)}}</ion-badge>
+          </div>
+          <ion-card style="padding-top: 2px"class="prise-card-pub">
+              {{publicity.command.products[0].price}} DT
+          </ion-card>
+          <ion-card-content>
+        <ion-card-title style="text-align: left">
+            {{publicity.command.products[0].name}}
+        </ion-card-title>
+
+          <ion-card-subtitle style="text-align: left; margin-top: 10px">
+              <p>{{publicity.command.name}} - {{publicity.command.products[0].price}} DT</p>
+          </ion-card-subtitle>
+          </ion-card-content>
+      </ion-card>
+        </ng-container>
+
+        <ng-container *ngIf="publicity.command.sub_families.length!=0">
+            <ion-card class="pub" style="height: 100%;" (click)="function(publicity.command,publicity.command.sub_families[0].products[0],publicity.command.sub_families[0],findProd(publicity.command.id,publicity.command.sub_families[0].products[0].id,publicity.command.sub_families[0].id))">
+                <img style="filter: brightness(70%); height: 60%; width: 100%;" src={{publicity.command.sub_families[0].products[0].product_image}}/>
+                <div class="added" *ngIf="findProd(publicity.command.id,publicity.command.sub_families[0].products[0].id,publicity.command.sub_families[0].id)">
+                    <ion-badge class="notif_prod"color="primary">{{productC(publicity.command.id,publicity.command.sub_families[0].products[0].id,publicity.command.sub_families[0].id)}}</ion-badge>
+                </div>
+                <ion-card style="padding-top: 2px"class="prise-card-pub">
+                    {{publicity.command.sub_families[0].products[0].price}} DT
+                </ion-card>
+                <ion-card-content >
+                <ion-card-title style="text-align: left">
+                    {{publicity.command.sub_families[0].products[0].name}}
+                </ion-card-title>
+                <ion-card-subtitle style="text-align: left; margin-top: 10px">
+                    <p>{{publicity.command.name}} - {{publicity.command.sub_families[0].name}} </p>
+                </ion-card-subtitle>
+
+                </ion-card-content>
+            </ion-card>
+        </ng-container>
+    </ion-slide>
+</ion-slides>
+<ion-grid style="padding-left:10px">
+  <ion-row>
+    <ion-col size="12">
+      <span>
+        <ion-title>
+          Menu
+        </ion-title>
+      </span>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+        <!--<ion-card>
+          <ion-card-header>
+            <img src="https://via.placeholder.com/300x100"/>
+          </ion-card-header>
+          <ion-card-title>
+
+          </ion-card-title>
+        </ion-card>-->
+        
+        <ion-segment [(ngModel)]='family' scrollable>
+          <ng-container *ngFor='let products of items'>
+          <ion-segment-button value="{{products.id}}" style='width: auto;'>
+              <ion-label>{{products.name}}</ion-label>
+          </ion-segment-button>
+         <!-- <ng-container *ngIf="products.sub_families.length!=0">
+          <ion-segment-button  *ngFor='let p of products.sub_families'  value="{{p.id}}"style='min-width: 200px;' >
+            <ion-label>{{p.name}}</ion-label>
+        </ion-segment-button>
+        </ng-container>-->
+        </ng-container>
+        </ion-segment>
+        
+<ng-container  [ngSwitch]="family" *ngFor="let products of items">
+  
+        <div *ngIf="products.sub_families.length==0">
+          <ion-list *ngSwitchCase="products.id" inset>
+              <ion-card *ngFor="let dis of products.products" (click)="function(products,dis,undefined,findProd(products.id,dis.id,undefined))">
+                  <img style=" filter: brightness(70%);" src={{dis.product_image}}/>
+                 <div class="added" *ngIf="findProd(products.id,dis.id,undefined)">
+                     <ion-badge class="notif_prod"color="primary">{{productC(products.id,dis.id,undefined)}}</ion-badge>
+                 </div>
+                  <ion-card style="padding-top: 4px"class="prise-card">
+                      {{dis.price}} DT
+                  </ion-card>
+                     <ion-card-content>
+                         <ion-card-title style="text-align: left">
+                             {{dis.name}}
+                         </ion-card-title>
+                         <ion-card-subtitle style="text-align: left; margin-top: 10px">
+                            {{products.name}}
+                         </ion-card-subtitle>
+                     </ion-card-content>
+
+                  
+
+
+
+              </ion-card>
+          </ion-list>
+        </div>
+        <ng-container *ngIf="products.sub_families.length!=0">
+          <div *ngFor="let p of products.sub_families ;let i=index">
+            <ion-list *ngSwitchCase="products.id" inset>
+              <ion-list-header>{{p.name}}</ion-list-header>
+                <ion-list>
+                <ion-card *ngFor="let dis of p.products" (click)="function(products,dis,p,findProd(products.id,dis.id,p.id))">
+                    <img style=" filter: brightness(70%);" src={{dis.product_image}}/>
+
+
+                    <div *ngIf="findProd(products.id,dis.id,p.id)" class="added">
+                       <ion-badge class="notif_prod" color="primary">{{productC(products.id,dis.id,p.id)}}</ion-badge>
+                    </div>
+                    <ion-card style="padding-top: 4px"class="prise-card">
+                        {{dis.price}} DT
+                    </ion-card>
+                    <ion-card-content>
+                        <ion-card-title style="text-align: left">
+                            {{dis.name}}
+                        </ion-card-title>
+                        <ion-card-subtitle style="text-align: left; margin-top: 10px">
+                            {{products.name}} - {{p.name}}
+                        </ion-card-subtitle>
+                    </ion-card-content>
+                </ion-card>
+                </ion-list>
+            </ion-list>
+          </div>
+        </ng-container>
+      </ng-container>
+        <!--<ion-segment [(ngModel)]='category'>
+          <ion-segment-button value="0">
+              <ion-label>
+                salad
+              </ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="1">
+            <ion-label>
+              bilel
+            </ion-label>
+        </ion-segment-button>
+        </ion-segment>
+        <div [ngSwitch]="category">
+          <ion-list *ngSwitchCase="'1'">
+            <ion-item >
+              hello
+            </ion-item>
+            <ion-item >
+              55555
+            </ion-item>
+          </ion-list >
+          <ion-list  *ngSwitchCase="'0'">
+            <ion-item>
+              hello1
+            </ion-item>
+            <ion-item>
+              hello52
+            </ion-item>
+            <ion-item>
+              hello8
+            </ion-item>
+          </ion-list>
+        </div>-->
+</ion-content>
+

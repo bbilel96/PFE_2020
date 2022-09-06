@@ -1,0 +1,54 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot='icon-only' name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Customer details </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ng-container *ngIf="this.c.longitude!= null && this.c.latitude!= null">
+  <div id="map" style="width:90%; height:50%;margin:5%"></div>
+  </ng-container>
+  <ion-list>
+    <ion-item>
+      <ion-label><h3>Customer ID :</h3>
+        <p> {{this.c?.id}}</p></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><h3>Customer name :</h3>
+        <p> {{this.c?.name}}</p></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><h3>Customer email :</h3>
+        <p> {{this.c?.email}}</p></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><h3>Customer phone :</h3>
+        <p> {{this.c?.phone}}</p></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><h3>Customer state :</h3>
+        <p> {{this.c?.state}}</p></ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label><h3>Creation date :</h3>
+        <p> {{this.c?.created_at | date: 'medium'}}</p></ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>
+<ion-footer>
+
+  <ion-button class="button-buy"(click)="changeState()" expand="full"  >
+    <ng-container *ngIf="this.c?.state.toLowerCase()=='active'">
+      Block Customer
+    </ng-container>
+    <ng-container *ngIf="this.c?.state.toLowerCase()=='blocked'">
+      Make Customer active
+    </ng-container>
+
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,213 @@
+
+<ion-header>
+  
+<ion-toolbar color="primary">
+  <ion-buttons  slot="start">
+    <ion-button (click)="back()">
+      <ion-icon class="added" slot='icon-only' name="chevron-back-outline"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+  <ion-title>Product details</ion-title>
+</ion-toolbar>
+
+  <!--<img src={{this.image}}/>-->
+
+  </ion-header>
+  <ion-content>
+    <img src={{this.image}}/>
+    <ng-container *ngIf="this.navParams.get('product').sub_families==null">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12">
+        {{this.navParams.get('product').name}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        {{this.navParams.get('product').products[0].name}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12">
+        Description:{{this.navParams.get('product').products[0].designation}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <hr>
+  <div>
+    
+    <ion-list>
+      <ion-list-header>
+        Option
+      </ion-list-header>
+      <div *ngFor="let entry of checks">
+        <ng-container *ngIf="entry.type.toLowerCase()=='option'">
+      <ion-item>
+
+        <ion-label><h3>{{entry.name}}</h3></ion-label>
+        <ng-container *ngIf="entry.price!=null">
+        {{entry.price}}DT
+        </ng-container>
+        <ng-container *ngIf="entry.price==null">
+        Free
+        </ng-container>
+
+        <ion-checkbox slot="end" [(ngModel)]="entry.checked" checked="entry.checked==true" (ionChange)="checkBox(entry)"></ion-checkbox>
+
+      </ion-item>
+        <ng-container *ngIf="entry.checked==true && this.c>1">
+        <ion-item>
+          <ion-range value="{{entry.count}}"    [(ngModel)]="entry.count"  min="1" max="{{this.c}}" snaps pin>
+            <ion-label  slot="start" > 1</ion-label>
+            <ion-label slot="end" >{{this.c}}</ion-label>
+          </ion-range>
+        </ion-item>
+
+        </ng-container>
+        </ng-container>
+    </div>
+    </ion-list>
+    <ion-list>
+      <ion-list-header>
+        Extra
+      </ion-list-header>
+      <div *ngFor="let entry of checks">
+        <ng-container *ngIf="entry.type.toLowerCase()=='extra'">
+        <ion-item>
+
+            <ion-label><h3>{{entry.name}}</h3></ion-label>
+            {{entry.price}}DT
+            <ion-checkbox slot="end" [(ngModel)]="entry.checked" checked="entry.checked==true" (ionChange)="checkBox(entry)"></ion-checkbox>
+
+        </ion-item>
+
+        <ng-container *ngIf="entry.checked==true && this.c>1">
+          <ion-item>
+            <ion-range value="{{entry.count}}"    [(ngModel)]="entry.count"  min="1" max="{{this.c}}" snaps pin>
+              <ion-label  slot="start" > 1</ion-label>
+              <ion-label slot="end" >{{this.c}}</ion-label>
+            </ion-range>
+          </ion-item>
+
+        </ng-container>
+        </ng-container>
+      </div>
+    </ion-list>
+
+  
+    
+    </div>
+    </ng-container>
+
+    <ng-container *ngIf="this.navParams.get('product').sub_families!=null">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            {{this.navParams.get('product').name}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            {{this.navParams.get('product').sub_families[0].name}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            {{this.navParams.get('product').sub_families[0].products[0].name}}
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="12">
+            Description:{{this.navParams.get('product').sub_families[0].products[0].designation}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <hr>
+      <div>
+
+        <ion-list>
+          <ion-list-header>
+            Option
+          </ion-list-header>
+          <div *ngFor="let entry of checks">
+            <ng-container *ngIf="entry.type.toLowerCase()=='option'">
+            <ion-item>
+              <ion-label><h3>{{entry.name}}</h3></ion-label>
+              <ng-container *ngIf="entry.price!=null">
+              {{entry.price}}DT
+              </ng-container>
+              <ng-container *ngIf="entry.price==null">
+                Free
+              </ng-container>
+              <ion-checkbox slot="end" [(ngModel)]="entry.checked" checked="entry.checked==true" (ionChange)="checkBox(entry)"></ion-checkbox>
+            </ion-item>
+            <ng-container *ngIf="entry.checked==true && this.c>1">
+              <ion-item>
+                <ion-range value="{{entry.count}}"    [(ngModel)]="entry.count"  min="1" max="{{this.c}}" snaps pin>
+                  <ion-label  slot="start" > 1</ion-label>
+                  <ion-label slot="end" >{{this.c}}</ion-label>
+                </ion-range>
+              </ion-item>
+            </ng-container>
+            </ng-container>
+          </div>
+        </ion-list>
+      </div>
+      <ion-list>
+        <ion-list-header>
+          Extra
+        </ion-list-header>
+        <div *ngFor="let entry of checks">
+          <ng-container *ngIf="entry.type.toLowerCase()=='extra'">
+            <ion-item>
+              <ion-label><h3>{{entry.name}}</h3></ion-label>
+              <ng-container *ngIf="entry.price!=null">
+                {{entry.price}}DT
+              </ng-container>
+              <ng-container *ngIf="entry.price==null">
+                Free
+              </ng-container>
+              <ion-checkbox slot="end" [(ngModel)]="entry.checked" checked="entry.checked==true" (ionChange)="checkBox(entry)"></ion-checkbox>
+            </ion-item>
+            <ng-container *ngIf="entry.checked==true && this.c>1">
+              <ion-item>
+                <ion-range value="{{entry.count}}"    [(ngModel)]="entry.count"  min="1" max="{{this.c}}" snaps pin>
+                  <ion-label  slot="start" > 1</ion-label>
+                  <ion-label slot="end" >{{this.c}}</ion-label>
+                </ion-range>
+              </ion-item>
+            </ng-container>
+          </ng-container>
+        </div>
+      </ion-list>
+    </ng-container>
+</ion-content>
+<ion-footer class="ion-no-border">
+ <div class="footer">
+   <ion-grid>
+     <ion-row>
+       <ion-col size="2" style="text-align: center;">
+        <ion-button [disabled]="this.c <=1"(click)="discount()"><ion-icon name="remove-outline" class="buttons"></ion-icon></ion-button>
+       </ion-col>
+       <ion-col style="padding-top: 3.5%;text-align: center;"size="2">
+       {{this.c}}
+       </ion-col>
+       <ion-col size="2">
+        <ion-button [disabled]="this.c>14"(click)="count()"><ion-icon name="add-outline" class="buttons"></ion-icon></ion-button>
+       </ion-col>
+       <ion-col style="text-align: center;">
+        <ng-container *ngIf="this.navParams.data.exist">
+          <ion-button shape="block" (click)="modifie(this.navParams.data.product)" style="text-align: center;"><strong>{{this.calculPrice()}}DT <br>Modifie</strong></ion-button>
+        </ng-container>
+        <ng-container *ngIf="!this.navParams.data.exist">
+          <ion-button shape="block" (click)="buy(this.navParams.data)" style="text-align: center;"><strong>{{this.calculPrice()}} DT<br>Add</strong></ion-button>
+        </ng-container>
+       </ion-col>
+     </ion-row>
+     
+   </ion-grid>
+ 
+
+  
+</div>
+</ion-footer>

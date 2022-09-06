@@ -1,0 +1,95 @@
+ion-slides{
+    ion-slide {
+      height: 250px;
+      width: 100% !important;
+
+      .pub{
+        height:300px;
+        width: 250px;
+    }
+  }
+}
+.notif_prod{
+  font-size: 16px;
+
+}
+.price{
+  margin-top: -10px;
+  right: 10%;
+  border-radius: 25px;
+  width: 100px;
+  height: 40px;
+  position:absolute;
+  background-color: white;
+  border: 2px solid black;
+}
+ion-card {
+  position: relative;
+  text-align: center;
+
+}
+.cardtitle {
+  position: absolute;
+  top: 36%;
+  font-size: 2.00em;
+  width: 100%;
+  font-weight: bold;
+  color: #ffffff;
+}
+.prise-card-pub{
+  width: 70px;
+  position:absolute;
+  bottom:75px;
+  right:10px;
+  height: 20px;
+  border-radius : 30px;
+  font-weight: 500;
+  font-size:12px;
+}
+.prise-card{
+  width: 100px;
+  position:absolute;
+  bottom:59px;
+  right:30px;
+  height: 30px;
+  border-radius : 30px;
+  font-weight: 500;
+
+
+}
+.cardsub {
+  font-size:1.00em ;
+  position:absolute;
+  color: #ffffff;
+  top: 52%;
+  width: 100%;
+}
+.added{
+  position: absolute;
+  top:5px;
+  right:5px;
+
+}
+
+
+
+    .card-title{
+      position: absolute;
+      top: 36%;
+      font-size: 2.00em;
+      width: 100%;
+      font-weight: bold;
+      color: #ffffff;
+    }
+    .card-subtitle{
+      font-size:1.00em ;
+      position:absolute;
+      color: #ffffff;
+      top: 52%;
+      width: 100%;
+    }
+
+
+
+
+

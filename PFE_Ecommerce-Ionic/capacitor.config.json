@@ -1,0 +1,8 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "PFE_Ecommerce",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {}
+}

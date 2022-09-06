@@ -1,0 +1,105 @@
+
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon slot='icon-only' name="chevron-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title> Products </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list>
+
+
+    <div *ngFor="let p of this.navParams.data.products">
+      <ng-container *ngIf="p.sub_families.length===0" >
+        <ion-list>
+          <ion-list-header>
+            {{p.name}}
+          </ion-list-header>
+          <ion-item-sliding *ngFor="let p1 of p.products">
+            <ion-item button (click)="function(p,undefined,p1)">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="6">
+                    <ion-label>{{p1.count}} x  {{p.name}} {{p1.name}}</ion-label>
+                  </ion-col>
+                  <ion-col size="6">
+                    <ion-label style="text-align: right;"> </ion-label>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-item>
+            <ion-item-options >
+              <ion-item-option  color="danger" (click)='delete(p.id,undefined,p1.id)'>
+                <ion-icon name="ios-close-outline"></ion-icon> Delete
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+        </ion-list>
+      </ng-container>
+      <ng-container *ngIf="p.sub_families.length!==0">
+        <ion-list-header inset>
+          {{p.name}}
+        </ion-list-header>
+
+        <ng-container *ngFor="let sub of p.sub_families">
+          <ion-list>
+            <ion-list-header>
+              {{sub.name}}
+            </ion-list-header>
+            <ion-item-sliding *ngFor="let p1 of sub.products">
+              <ion-item button (click)="function(p,sub,p1)">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col size="6">
+                      <ion-label>{{p1.count}} x  {{p.name}} {{p1.name}}</ion-label>
+                    </ion-col>
+                    <ion-col size="6">
+                      <ion-label style="text-align: right;">{{p1.price*p1.count}} DT </ion-label>
+                    </ion-col>
+                  </ion-row>
+                </ion-grid>
+              </ion-item>
+              <ion-item-options>
+                <ion-item-option  color="danger" (click)='delete(p.id,sub.id,p1.id)'>
+                  <ion-icon name="ios-close-outline"></ion-icon> Delete
+                </ion-item-option>
+              </ion-item-options>
+            </ion-item-sliding>
+          </ion-list>
+        </ng-container>
+      </ng-container>
+    </div>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        Price
+      </ion-col>
+      <ion-col col="6" style="text-align: right;">
+        {{this.calPrice()}} DT
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        service charge
+      </ion-col>
+      <ion-col size="6" style="text-align: right;">
+        0000 DT
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-content *ngIf="">
+  <ion-button class="button-buy" expand="full" >Buy</ion-button>
+  </ion-content>
+
+</ion-footer>
